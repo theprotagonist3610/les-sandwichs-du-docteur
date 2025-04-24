@@ -1,4 +1,7 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-@import "tailwindcss";
+@import "tailwindcss"; 
+@theme{
+    --color-doctor-cream: #ffe8c9;
+    --color-doctor-red: #a41624;
+    --color-doctor-orange: #ffb564;
+    --color-doctor-deeporange: #d9571d;
+}
