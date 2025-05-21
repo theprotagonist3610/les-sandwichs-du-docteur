@@ -1,0 +1,226 @@
+[
+  {
+    "nom": "Sel",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🧂",
+    "calories": "0"
+  },
+  {
+    "nom": "Sucre",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🍬",
+    "calories": "387"
+  },
+  {
+    "nom": "Poivron",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🫑",
+    "calories": "30"
+  },
+  {
+    "nom": "Poivre noir",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🌶️",
+    "calories": "251"
+  },
+  {
+    "nom": "Carotte",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🥕",
+    "calories": "41"
+  },
+  {
+    "nom": "Echalotte",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🧅",
+    "calories": "72"
+  },
+  {
+    "nom": "Oignon",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🧅",
+    "calories": "40"
+  },
+  {
+    "nom": "Mangue",
+    "nom_type":"Fruits",
+    "type": "fruits",
+    "icone": "🥭",
+    "calories": "60"
+  },
+  {
+    "nom": "Banane plantain",
+    "nom_type":"Fruits",
+    "type": "fruits",
+    "icone": "🍌",
+    "calories": "122"
+  },
+  {
+    "nom": "Lait en poudre",
+    "nom_type":"Lait et dérivés",
+    "type": "lait et derives",
+    "icone": "🥛",
+    "calories": "496"
+  },
+  {
+    "nom": "Ail",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🧄",
+    "calories": "149"
+  },
+  {
+    "nom": "Gingembre",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🫚",
+    "calories": "80"
+  },
+  {
+    "nom": "Haricot vert",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🟢",
+    "calories": "31"
+  },
+  {
+    "nom": "Sucre vanille",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🍮",
+    "calories": "400"
+  },
+  {
+    "nom": "Feuille de menthe",
+    "nom_type":"Aromatique",
+    "type": "aromatique",
+    "icone": "🌿",
+    "calories": "44"
+  },
+  {
+    "nom": "Persil",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🌿",
+    "calories": "36"
+  },
+  {
+    "nom": "Laitue",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🥬",
+    "calories": "15"
+  },
+  {
+    "nom": "Poisson",
+    "nom_type":"Poissons et dérivés",
+    "type": "poissons et derives",
+    "icone": "🐟",
+    "calories": "120"
+  },
+  {
+    "nom": "Viande de lapin",
+    "nom_type":"Viande blanche",
+    "type": "viande blanche",
+    "icone": "🐇",
+    "calories": "173"
+  },
+  {
+    "nom": "Viande de mouton",
+    "nom_type":"Viande Rouge",
+    "type": "viande rouge",
+    "icone": "🐑",
+    "calories": "294"
+  },
+  {
+    "nom": "Viande de boeuf",
+    "nom_type":"Viande Rouge",
+    "type": "viande rouge",
+    "icone": "🐄",
+    "calories": "250"
+  },
+  {
+    "nom": "Viande de poulet",
+    "nom_type":"Viande blanche",
+    "type": "viande blanche",
+    "icone": "🍗",
+    "calories": "165"
+  },
+  {
+    "nom": "Citron",
+    "nom_type":"Fruits",
+    "type": "fruits",
+    "icone": "🍋",
+    "calories": "29"
+  },
+  {
+    "nom": "Piment",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🌶️",
+    "calories": "40"
+  },
+  {
+    "nom": "Concombre",
+    "nom_type":"Légumes",
+    "type": "legumes",
+    "icone": "🥒",
+    "calories": "16"
+  },
+  {
+    "nom": "Vinaigre blanc",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🧪",
+    "calories": "20"
+  },
+  {
+    "nom": "Moutarde",
+    "nom_type":"Epices",
+    "type": "epices",
+    "icone": "🥫",
+    "calories": "66"
+  },
+  {
+    "nom": "Huile d'arachide",
+    "nom_type":"Matières grasses",
+    "type": "matieres grasse",
+    "icone": "🛢️",
+    "calories": "884"
+  },
+  {
+    "nom": "Crevette",
+    "nom_type":"Poissons et dérivés",
+    "type": "poissons et derives",
+    "icone": "🦐",
+    "calories": "99"
+  },
+  {
+    "nom": "Pomme de terre",
+    "nom_type":"Racines / Féculents",
+    "type": "racines/feculents",
+    "icone": "🥔",
+    "calories": "77"
+  },
+  {
+    "nom": "Riz",
+    "nom_type":"Noix / Graines",
+    "type": "noix/graines",
+    "icone": "🍚",
+    "calories": "365"
+  },
+  {
+    "nom": "Pain viennois",
+    "nom_type":"Noix / Graines",
+    "type": "noix/graines",
+    "icone": "🥖",
+    "calories": "300"
+  }
+]
