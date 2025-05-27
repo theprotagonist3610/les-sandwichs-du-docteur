@@ -1,16 +1,5 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-
-const Commandes = () => {
+export default function Commandes() {
   return (
-    <div className="min-h-screen bg-doctor-cream text-doctor-red">
-      {/* Navbar en haut */}
-      <Navbar />
-
-      {/* Contenu de la page */}
-      <main className="text-center py-20"></main>
-    </div>
+    <div className="p-4">⚖️ Ici s'affichera la balance nutritionnelle</div>
   );
-};
-
-export default Commandes;
+}

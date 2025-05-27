@@ -1,60 +1,110 @@
-import React, { useState } from "react";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { FullLoaderProvider } from "./context/FullLoaderContext";
+import { auth, db } from "./firebase";
+import { useLocation } from "react-router-dom";
+// Layouts
+import AdminLayout from "./layouts/AdminLayout";
+import Home from "./pages/Home";
+
+// Pages publiques
 import Commandes from "./pages/Commandes";
-import Admin from "./pages/Admin";
-import Inscription from "./pages/Inscription";
-import Connexion from "./pages/Connexion";
-import { Toaster, toast } from "sonner";
-import { useUser } from "./UserContext";
-import { Outlet } from "react-router-dom";
-import FloatingNotifier from "./components/FloatingNotifier";
-import UserConstantesDialog from "./components/UserConstantesDialog";
-const ProtectedAdminRoute = () => {
-  const { utilisateur } = useUser();
-  const { id } = useParams();
-  // Vérifier si l'ID existe et est valide (ajoutez votre propre logique de validation)
-  const isValidId = (id) => {
-    // Exemple de validation - à adapter selon vos besoins
-    return id && utilisateur && id === utilisateur?.uid; // Supposons que vos IDs font 24 caractères
-  };
+import Balance from "./pages/Balance";
+import Agent from "./pages/Agent";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Profil from "./pages/Profil";
 
-  if (!isValidId(id)) {
-    // Rediriger vers la page de login si l'ID est invalide
-    toast.error("Accès non autorisé - ID admin requis");
-    return <Navigate to="/connexion" replace />;
-  }
+// Pages admin
+import AdminHome from "./pages/admin/AdminHome";
+import Production from "./pages/admin/Production";
+import Stock from "./pages/admin/Stock";
+import Clients from "./pages/admin/Clients";
+import Promotions from "./pages/admin/Promotions";
+import AgentAdmin from "./pages/admin/Agent";
+import Compta from "./pages/admin/Compta";
+import Stats from "./pages/admin/Stats";
 
-  // Si l'ID est valide, afficher le dashboard admin
-  return <Admin adminId={id} />;
-};
+// Composants
+import TopNavbar from "./components/TopNavbar";
+import BottomNav from "./components/BottomNav";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
-  const { utilisateur } = useUser();
-  const [openDialog, setOpenDialog] = useState(false);
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
-      <Toaster position="top-right" richColors />
+      {!isAdminRoute && <TopNavbar />}
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* Routes publiques */}
+        <Route path="/" element={<Home />} />
         <Route path="/commandes" element={<Commandes />} />
-        <Route path="/admin/:id" element={<ProtectedAdminRoute />} />
-        <Route path="/inscription" element={<Inscription />} />
-        <Route path="/Connexion" element={<Connexion />} />
+        <Route path="/balance" element={<Balance />} />
+        <Route path="/agent" element={<Agent />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profil" element={<Profil />} />
+
+        {/* Routes admin protégées */}
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+          <Route index element={<AdminHome />} />
+          <Route path="production" element={<Production />} />
+          <Route path="stock" element={<Stock />} />
+          <Route path="clients" element={<Clients />} />
+          <Route path="promotions" element={<Promotions />} />
+          <Route path="agent" element={<AgentAdmin />} />
+          <Route path="compta" element={<Compta />} />
+          <Route path="stats" element={<Stats />} />
+        </Route>
       </Routes>
-      {utilisateur && (
-        <div className="relative">
-          <Outlet />
 
-          <FloatingNotifier onClick={() => setOpenDialog(true)} />
-
-          <UserConstantesDialog
-            open={openDialog}
-            onClose={() => setOpenDialog(false)}
-          />
-        </div>
-      )}
+      {!isAdminRoute && <BottomNav />}
     </>
+  );
+}
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        setRole(userSnap.data()?.role || "client");
+      } else {
+        setRole(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) return <div className="p-4">⏳ Chargement utilisateur...</div>;
+
+  return (
+    <FullLoaderProvider>
+      <Router>
+        <div className="bg-app text-app min-h-screen pb-20 md:pb-0">
+          <AppContent />
+        </div>
+      </Router>
+    </FullLoaderProvider>
   );
 }
 

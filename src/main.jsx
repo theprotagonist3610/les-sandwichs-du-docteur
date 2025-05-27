@@ -1,20 +1,10 @@
-// src/main.jsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from "./UserContext.jsx";
-import { PanierProvider } from "./PanierContext.jsx";
-import App from "./App.jsx";
-import "./index.css"; // Fichier TailwindCSS
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <PanierProvider>
-          <App />
-        </PanierProvider>
-      </UserProvider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
