@@ -56,18 +56,33 @@ export default function TopNavbar() {
 
         {/* Navigation */}
         <nav className="flex gap-4 items-center">
-          {navItems.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `${linkClass} ${
-                  isActive ? "text-primary font-bold" : "text-app"
-                }`
-              }>
-              {label}
-            </NavLink>
-          ))}
+          {navItems.map(({ to, label }) =>
+            label != "Admin" ? (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `${linkClass} ${
+                    isActive ? "text-primary font-bold" : "text-app"
+                  }`
+                }>
+                {label}
+              </NavLink>
+            ) : (
+              user && (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `${linkClass} ${
+                      isActive ? "text-primary font-bold" : "text-app"
+                    }`
+                  }>
+                  {label}
+                </NavLink>
+              )
+            )
+          )}
         </nav>
 
         {/* Actions (Theme + user) */}

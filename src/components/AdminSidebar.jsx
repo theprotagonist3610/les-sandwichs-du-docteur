@@ -9,8 +9,11 @@ import {
   Bot,
   Wallet,
   BarChart3,
+  X,
+  LogOut,
 } from "lucide-react";
-
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 const routes = [
   { to: "/admin", label: "Accueil", icon: <LayoutDashboard size={16} /> },
   { to: "/admin/production", label: "Production", icon: <Package size={16} /> },
@@ -44,6 +47,27 @@ export default function AdminSidebar({ open, onClose }) {
               <span>{label}</span>
             </NavLink>
           ))}
+          <NavLink
+            to={"/"}
+            onClick={onClose}
+            className={`${linkClass} bg-app text-app`}>
+            <span>
+              <X size={16} />
+            </span>
+            <span>{"Fermer Admin"}</span>
+          </NavLink>
+          <NavLink
+            to={"/"}
+            onClick={async () => {
+              await signOut(auth);
+              onClose();
+            }}
+            className={`${linkClass} bg-app text-app`}>
+            <span>
+              <LogOut size={16} />
+            </span>
+            <span>{"Deconnexion"}</span>
+          </NavLink>
         </div>
       </SheetContent>
     </Sheet>

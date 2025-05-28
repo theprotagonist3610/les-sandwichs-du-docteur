@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { FullLoaderProvider } from "./context/FullLoaderContext";
 import { auth, db } from "./firebase";
 import { useLocation } from "react-router-dom";
+import { Toaster } from "sonner";
 // Layouts
 import AdminLayout from "./layouts/AdminLayout";
 import Home from "./pages/Home";
@@ -99,6 +100,23 @@ function App() {
 
   return (
     <FullLoaderProvider>
+      <Toaster
+        richColors
+        position="top-right"
+        className="sonner-toaster"
+        toastOptions={{
+          classNames: {
+            toast:
+              "bg-white text-app rounded-md shadow-lg border border-accent px-4 py-3",
+            success: "border-l-4 border-green-500",
+            error: "border-l-4 border-red-500",
+            warning: "border-l-4 border-yellow-500",
+            info: "border-l-4 border-blue-500",
+            description: "text-sm text-muted-foreground mt-1",
+            title: "font-semibold text-app",
+          },
+        }}
+      />
       <Router>
         <div className="bg-app text-app min-h-screen pb-20 md:pb-0">
           <AppContent />

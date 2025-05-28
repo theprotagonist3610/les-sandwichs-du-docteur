@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 export default function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
+  const [err, setErr] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,10 +33,12 @@ export default function Login() {
       const role = userSnap.data()?.role || "client";
 
       toast.success("Connexion réussie. Bienvenue !");
-      navigate(role === "admin" ? "/admin" : "/");
+      navigate(role === "admin" ? "/" : "/");
     } catch (error) {
       console.error(error);
+      setErr("Email ou mot de passe incorrect.");
       toast.error("Email ou mot de passe incorrect.");
+      setTimeout(() => setErr(""), 4000);
     }
   };
 
@@ -48,7 +51,7 @@ export default function Login() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label>Email</Label>
+              <Label className="py-1">Email</Label>
               <Input
                 type="email"
                 name="email"
@@ -58,7 +61,7 @@ export default function Login() {
               />
             </div>
             <div>
-              <Label>Mot de passe</Label>
+              <Label className="py-1">Mot de passe</Label>
               <Input
                 type="password"
                 name="password"
@@ -75,6 +78,9 @@ export default function Login() {
               <Link to="/signup" className="text-primary hover:underline">
                 Créer un compte
               </Link>
+            </div>
+            <div className="text-sm text-center italic text-red-500 mt-2">
+              {<span>{err}</span>}
             </div>
           </form>
         </CardContent>

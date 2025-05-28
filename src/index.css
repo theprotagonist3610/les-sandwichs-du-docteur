@@ -38,6 +38,20 @@
 
 /* === Exemples de classes utilisant les variables === */
 @layer utilities {
+  /* Position personnalisée pour le toaster Sonner */
+    @media (min-width: 768px) {
+      .sonner-toaster[data-x-position='right'][data-y-position='top'] {
+        right: 1rem !important;
+        left: auto !important;
+      }
+    }
+  
+    @media (max-width: 767px) {
+      .sonner-toaster[data-x-position='center'][data-y-position='top'] {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+      }
+    }
   .animate-spin-smooth {
       animation: spinSmooth 5s linear infinite;
     }

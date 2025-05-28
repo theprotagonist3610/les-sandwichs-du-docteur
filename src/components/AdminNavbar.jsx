@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
+import useUser from "../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Package,
@@ -10,8 +12,17 @@ import {
   Bot,
   Wallet,
   BarChart3,
+  X,
+  LogOut,
 } from "lucide-react";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 const routes = [
   { to: "/admin", label: "Accueil", icon: <LayoutDashboard size={16} /> },
   { to: "/admin/production", label: "Production", icon: <Package size={16} /> },
@@ -24,8 +35,13 @@ const routes = [
 ];
 
 export default function AdminNavbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
+  const { user, userData, loading } = useUser();
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/stock");
+  };
   const linkClass =
     "text-sm font-medium px-3 py-2 rounded transition flex items-center gap-1 hover:underline underline-offset-4";
 
@@ -61,10 +77,25 @@ export default function AdminNavbar() {
               </NavLink>
             ))}
           </nav>
-
-          {/* Droite : bienvenue / actions si besoin */}
-          <div className="text-sm text-muted-foreground hidden md:inline">
-            Bienvenue 👨‍⚕️
+          {/* Droite : dropdown admin */}
+          <div className="relative hidden md:inline">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-sm text-muted-foreground cursor-pointer">
+                {userData
+                  ? `${userData.prenom} ${userData.nom[0]}.👨‍⚕️`
+                  : `Bienvenue 👨‍⚕️`}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-app text-app z-50">
+                <DropdownMenuItem onClick={() => navigate("/")}>
+                  {" "}
+                  <X size={14} className="mr-2" /> Fermer Admin
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  {" "}
+                  <LogOut size={14} className="mr-2" /> Déconnexion
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
